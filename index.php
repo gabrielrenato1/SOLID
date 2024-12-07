@@ -3,25 +3,53 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use App\ShoppingCart;
+use App\Item;
+use App\Order;
+use App\EmailService;
 
-$shoppingCart = new ShoppingCart();
+$order = new Order();
 
-print_r($shoppingCart->getItems());
-echo "<br/> Valor total: " . $shoppingCart->getTotalValue() . '<br/>';
+echo "<h3>Carrinho válido? " . ($order->getShoppingCart()->verifyCart() ? 'Sim' : 'Não') . "</h3>";
 
-$shoppingCart->addItem("Bolo de Cenoura", 15.90);
-$shoppingCart->addItem("Bolo de Chocolate", 10.90);
-$shoppingCart->addItem("Bolo de Doce de Leite", 20.90);
+$item = new Item();
+$item->setDescription("Bolo de Cenoura");
+$item->setValue(15.90);
 
-print_r($shoppingCart->getItems());
-echo "<br/> Valor total: " . $shoppingCart->getTotalValue() . '<br/>';
-echo "Status: " . $shoppingCart->getStatus() . '<br/>';
+$item2 = new Item();
+$item2->setDescription("Bolo de Chocolate");
+$item2->setValue(10.90);
 
-if($shoppingCart->confirmOrder()) {
-    echo "Pedido criado com sucesso <br/>";
-}else{
-    echo "Erro na confirmação do pedido. Carrinho sem itens <br/>";
+$item3 = new Item();
+$item3->setDescription("Bolo de Chocolate");
+$item3->setValue(10.90);
+
+$order->getShoppingCart()->addItem($item);
+$order->getShoppingCart()->addItem($item2);
+$order->getShoppingCart()->addItem($item3);
+
+echo "<h3>Pedido</h3>";
+echo "<pre>";
+    print_r($order);
+echo "</pre>";
+
+echo "<h3>Itens</h3>";
+echo "<pre>";
+    print_r($order->getShoppingCart()->getItems());
+echo "</pre>";
+
+$total = 0;
+foreach ($order->getShoppingCart()->getItems() as $item){
+    $total += $item->getValue();
+}
+echo "<h3>Valor total: " . $total . "</h3>";
+
+
+echo "<h3>Carrinho válido? " . ($order->getShoppingCart()->verifyCart() ? 'Sim' : 'Não') . "</h3>";
+
+echo "<h3>Status pedido: " . $order->getStatus() . "</h3>";
+
+if($order->confirmOrder()){
+    echo EmailService::sendEmail();
 }
 
-echo "Status: " . $shoppingCart->getStatus() . '<br/>';
-
+echo "<h3>Status pedido: " . $order->getStatus() . "</h3>";
