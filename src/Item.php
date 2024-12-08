@@ -27,5 +27,10 @@ class Item {
         $this->value = $value;
     }
 
+    public function verifyItem():bool {
+        
+        return !(empty($this->description) || $this->value <= 0);
+        
+    }
 
 }
