@@ -1,3 +1,8 @@
 shoppingCart/vendor
 shoppingCart/composer.lock
+
+extractTransformLoad/vendor
+extractTransformLoad/composer.lock
+
 .idea
+.DS_Store
