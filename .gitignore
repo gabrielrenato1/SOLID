@@ -4,5 +4,8 @@ shoppingCart/composer.lock
 extractTransformLoad/vendor
 extractTransformLoad/composer.lock
 
+polygons/vendor
+polygons/composer.lock
+
 .idea
 .DS_Store
