@@ -7,5 +7,8 @@ extractTransformLoad/composer.lock
 polygons/vendor
 polygons/composer.lock
 
+crm/vendor
+crm/composer.lock
+
 .idea
 .DS_Store
