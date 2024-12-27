@@ -34,23 +34,11 @@ class Reader {
         
         $dir = $this->getDirectory() . '/' . $this->getFile();
         $mime = explode('.', $this->getFile());
-        $file = new File();
 
-        if($mime[1] == "csv"){
-        
-            $file->readFileCSV($dir);
-            
-        } else if($mime[1] == "txt"){
+        $class = '\App\\Extractor\\' . ucfirst($mime[1]);
 
-            $file->readFileTXT($dir);
+        return call_user_func_array([new $class, 'readFile'], [$dir]);
 
-        }
-        
-        return $file->getData();
-        
     }
-    
-    
-    
-
+  
 }
