@@ -33,13 +33,24 @@ class Reader {
     public function readFile():array {
         
         $dir = $this->getDirectory() . '/' . $this->getFile();
-        
+        $mime = explode('.', $this->getFile());
         $file = new File();
-        $file->readFileCSV($dir);
+
+        if($mime[1] == "csv"){
+        
+            $file->readFileCSV($dir);
+            
+        } else if($mime[1] == "txt"){
+
+            $file->readFileTXT($dir);
+
+        }
         
         return $file->getData();
         
     }
+    
+    
     
 
 }
