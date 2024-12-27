@@ -5,9 +5,11 @@ namespace App\dao;
 use App\components\Log;
 use App\components\Notification;
 use App\Database;
+use App\interfaces\LogInterface;
+use App\interfaces\NotificationInterface;
 use App\interfaces\RegisterInterface;
 
-class UserModel extends Database implements RegisterInterface {
+class UserModel extends Database implements RegisterInterface, LogInterface, NotificationInterface {
 
     public function save(){
         // TODO: Implement save() method.
@@ -20,4 +22,5 @@ class UserModel extends Database implements RegisterInterface {
     public function sendNotification(Notification $notification){
         // TODO: Implement sendNotification() method.
     }
+    
 }
