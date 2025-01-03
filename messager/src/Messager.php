@@ -6,9 +6,24 @@ use App\Email;
 
 class Messager{
 
-    public function sendToken(){
-        $email = new Email();
-        $email->send();
+    private $channel;
+
+    public function getChannel()
+    {
+        return $this->channel;
+    }
+
+    public function setChannel($channel): void
+    {
+        $this->channel = $channel;
+    }
+    
+    public function sendToken(): void{
+        
+        $class = "\App\\" . ucfirst($this->getChannel());
+        $instance = new $class;
+        $instance->send();
+        
     }
     
 }

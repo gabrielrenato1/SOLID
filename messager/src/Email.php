@@ -2,9 +2,9 @@
 
 namespace App;
 
-class Email{
+class Email implements TokenMessageInterface {
 
-    public function send(){
+    public function send(): void{
         echo "email sent";
     }
 
