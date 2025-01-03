@@ -10,5 +10,8 @@ polygons/composer.lock
 crm/vendor
 crm/composer.lock
 
+messager/vendor
+messager/composer.lock
+
 .idea
 .DS_Store
